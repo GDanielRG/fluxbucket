@@ -59,7 +59,7 @@ export default function AppLayout({
               <div className="flex">
                 {/* <!-- Logo --> */}
                 <div className="flex-shrink-0 flex items-center">
-                  <InertiaLink href={route('dashboard')}>
+                  <InertiaLink href={route('home')}>
                     <JetApplicationMark className="block h-9 w-auto" />
                   </InertiaLink>
                 </div>
@@ -67,10 +67,10 @@ export default function AppLayout({
                 {/* <!-- Navigation Links --> */}
                 <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                   <JetNavLink
-                    href={route('dashboard')}
-                    active={route().current('dashboard')}
+                    href={route('home')}
+                    active={route().current('home')}
                   >
-                    Dashboard
+                    Home
                   </JetNavLink>
                 </div>
               </div>
@@ -128,40 +128,6 @@ export default function AppLayout({
                                 Create New Team
                               </JetDropdownLink>
                             ) : null}
-
-                            <div className="border-t border-gray-100"></div>
-
-                            {/* <!-- Team Switcher --> */}
-                            <div className="block px-4 py-2 text-xs text-gray-400">
-                              Switch Teams
-                            </div>
-
-                            {page.props.user.all_teams?.map(team => (
-                              <form
-                                onSubmit={e => switchToTeam(e, team)}
-                                key={team.id}
-                              >
-                                <JetDropdownLink as="button">
-                                  <div className="flex items-center">
-                                    {team.id ==
-                                      page.props.user.current_team_id && (
-                                      <svg
-                                        className="mr-2 h-5 w-5 text-green-400"
-                                        fill="none"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                      >
-                                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                      </svg>
-                                    )}
-                                    <div>{team.name}</div>
-                                  </div>
-                                </JetDropdownLink>
-                              </form>
-                            ))}
                           </>
                         ) : null}
                       </div>
@@ -212,10 +178,6 @@ export default function AppLayout({
                     <div className="block px-4 py-2 text-xs text-gray-400">
                       Manage Account
                     </div>
-
-                    <JetDropdownLink href={route('profile.show')}>
-                      Profile
-                    </JetDropdownLink>
 
                     {page.props.jetstream.hasApiFeatures ? (
                       <JetDropdownLink href={route('api-tokens.index')}>
@@ -282,26 +244,16 @@ export default function AppLayout({
           >
             <div className="pt-2 pb-3 space-y-1">
               <JetResponsiveNavLink
-                href={route('dashboard')}
-                active={route().current('dashboard')}
+                href={route('home')}
+                active={route().current('home')}
               >
-                Dashboard
+                Home
               </JetResponsiveNavLink>
             </div>
 
             {/* <!-- Responsive Settings Options --> */}
             <div className="pt-4 pb-1 border-t border-gray-200">
               <div className="flex items-center px-4">
-                {page.props.jetstream.managesProfilePhotos ? (
-                  <div className="flex-shrink-0 mr-3">
-                    <img
-                      className="h-10 w-10 rounded-full object-cover"
-                      src={page.props.user.profile_photo_url}
-                      alt={page.props.user.name}
-                    />
-                  </div>
-                ) : null}
-
                 <div>
                   <div className="font-medium text-base text-gray-800">
                     {page.props.user.name}
@@ -364,34 +316,6 @@ export default function AppLayout({
                       </JetResponsiveNavLink>
                     ) : null}
 
-                    <div className="border-t border-gray-200"></div>
-
-                    {/* <!-- Team Switcher --> */}
-                    <div className="block px-4 py-2 text-xs text-gray-400">
-                      Switch Teams
-                    </div>
-                    {page.props.user?.all_teams?.map(team => (
-                      <form onSubmit={e => switchToTeam(e, team)} key={team.id}>
-                        <JetResponsiveNavLink as="button">
-                          <div className="flex items-center">
-                            {team.id == page.props.user.current_team_id && (
-                              <svg
-                                className="mr-2 h-5 w-5 text-green-400"
-                                fill="none"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                              >
-                                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                              </svg>
-                            )}
-                            <div>{team.name}</div>
-                          </div>
-                        </JetResponsiveNavLink>
-                      </form>
-                    ))}
                   </>
                 ) : null}
               </div>
